@@ -20,8 +20,11 @@ public class PoseBlock implements Listener{
 	public void onPutBlock(BlockPlaceEvent e) {
 		Player p = e.getPlayer();
 		Block b = e.getBlock();
+		String team = TeamData.getInstance().getTeam(p);
 		
-		
+		if(mc.Area1.isInBase(b.getLocation())){
+			// a reprendre ici
+		}
 		
 	}
 }
