@@ -1,0 +1,7 @@
+.classpath
+.project
+.idea
+.settings
+bin
+.gradle
+gradle/wrapper/gradle-wrapper.jar
