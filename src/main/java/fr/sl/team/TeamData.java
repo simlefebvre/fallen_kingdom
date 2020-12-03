@@ -4,30 +4,41 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class TeamData {
     private static final TeamData instance = new TeamData();
-    private final HashMap<String, ArrayList<Player>> Teams;
+    private final HashMap<String, ArrayList<Player>> teams;
+    private final HashMap<Player, String> players;
 
     private TeamData() {
-        Teams = new HashMap<>();
+        teams = new HashMap<>();
+        players = new HashMap<>();
     }
 
     public boolean teamExist(String name) {
-        return Teams.containsKey(name);
-    }
-
-    public List<Player> getTeamPlayerList(String teamName) {
-        return Teams.get(teamName);
+        return teams.containsKey(name);
     }
 
     public void createTeam(String teamName) {
-        Teams.put(teamName, new ArrayList<>());
+        teams.put(teamName, new ArrayList<>());
     }
 
     public static TeamData getInstance() {
         return instance;
+    }
+
+    public void addPlayerToTeam(Player player, String teamName) {
+        if (!teams.containsKey(teamName)) {
+            return;
+        }
+        if (!teams.get(teamName).contains(player)) {
+            teams.get(teamName).add(player);
+        }
+        players.put(player, teamName);
+    }
+
+    public String getTeam(Player player) {
+        return players.get(player);
     }
 
 }
