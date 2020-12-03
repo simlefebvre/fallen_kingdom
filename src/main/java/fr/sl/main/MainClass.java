@@ -20,8 +20,8 @@ public class MainClass extends JavaPlugin {
 
         LOGGER = getLogger();
 
-        //this.getCommand("fk").setExecutor(new CommandeManager());
         getServer().getPluginManager().registerEvents(new BreakBlock(this), this);
+        
         TeamLoader teamLoader = new TeamLoader(this);
         teamLoader.registerTeamSystem();
     }
