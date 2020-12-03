@@ -3,3 +3,8 @@ main: fr.sl.main.MainClass
 author: SimonLefebvre
 version: 0.0
 api-version: 1.13
+commands:
+  fkteam:
+    description: on taffe dessus tkt
+    usage: /<command> test
+    permission: fallenkingdom.teammanagement

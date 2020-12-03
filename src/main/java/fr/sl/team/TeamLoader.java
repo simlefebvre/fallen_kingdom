@@ -11,7 +11,7 @@ public class TeamLoader {
     }
 
     public void registerTeamSystem() {
-        
+        main.getCommand("fkteam").setExecutor(new TeamCommand());
     }
 
 }
