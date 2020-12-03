@@ -12,7 +12,7 @@ public class MainClass extends JavaPlugin {
         System.out.println("[FALLEN KINGDOM] le plugin est bien lance");
         this.saveDefaultConfig();
         //this.getCommand("fk").setExecutor(new CommandeManager());
-        getServer().getPluginManager().registerEvents(new BreakBlock(), this);
+        getServer().getPluginManager().registerEvents(new BreakBlock(this), this);
         TeamLoader teamLoader = new TeamLoader(this);
         teamLoader.registerTeamSystem();
     }
