@@ -11,6 +11,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import fr.sl.main.MainClass;
+import fr.sl.zone.Area;
 
 public class BreakBlock implements Listener {
 	
@@ -64,10 +65,12 @@ public class BreakBlock implements Listener {
         	e.setCancelled(true);
         }else if(p.getGameMode().equals(GameMode.CREATIVE) && e.getPlayer().getInventory().getItemInMainHand().equals(new ItemStack(Material.WOODEN_AXE))) {
         	e.setCancelled(true);
+        	mc.Area1 = new Area(coo1, coo2, 1);
         	saveBaseConfig(1);
         	p.sendMessage("Le fichier de config a bien etait mis a jours");
         }else if(p.getGameMode().equals(GameMode.CREATIVE) && e.getPlayer().getInventory().getItemInMainHand().equals(new ItemStack(Material.STONE_AXE))) {
         	e.setCancelled(true);
+        	mc.Area2 = new Area(coo1, coo2, 2);
         	saveBaseConfig(2);
         	p.sendMessage("Le fichier de config a bien etait mis a jours");
         }

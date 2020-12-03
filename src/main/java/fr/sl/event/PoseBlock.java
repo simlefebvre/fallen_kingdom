@@ -6,10 +6,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import fr.sl.main.MainClass;
+import fr.sl.team.TeamData;
 
 public class PoseBlock implements Listener{
 	
-	
+	private TeamData team;
 	private MainClass mc;
 	
 	public PoseBlock(MainClass main) {
@@ -20,7 +21,7 @@ public class PoseBlock implements Listener{
 		Player p = e.getPlayer();
 		Block b = e.getBlock();
 		
-	
+		
 		
 	}
 }
