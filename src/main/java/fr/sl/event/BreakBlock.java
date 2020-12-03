@@ -54,22 +54,22 @@ public class BreakBlock implements Listener {
         		coo2[1] = 0;
         		coo2[2] = 0;
         		wd = b.getWorld();
-        		p.sendMessage(String.format("Position 1 établie temporairement en %d,%d,%d", coo1[0],coo1[1],coo1[2]));
+        		p.sendMessage(String.format("Position 1 etabli temporairement en %d,%d,%d", coo1[0],coo1[1],coo1[2]));
         	}else {
         		coo2[0] = b.getX();
         		coo2[1] = b.getY();
         		coo2[2] = b.getZ();
-        		p.sendMessage(String.format("Position 2 établie temporairement en %d,%d,%d", coo2[0],coo2[1],coo2[2]));
+        		p.sendMessage(String.format("Position 2 etabli temporairement en %d,%d,%d", coo2[0],coo2[1],coo2[2]));
         	}
         	e.setCancelled(true);
         }else if(p.getGameMode().equals(GameMode.CREATIVE) && e.getPlayer().getInventory().getItemInMainHand().equals(new ItemStack(Material.WOODEN_AXE))) {
         	e.setCancelled(true);
         	saveBaseConfig(1);
-        	p.sendMessage("Le fichier de config à bien était mis à jours");
+        	p.sendMessage("Le fichier de config a bien etait mis a jours");
         }else if(p.getGameMode().equals(GameMode.CREATIVE) && e.getPlayer().getInventory().getItemInMainHand().equals(new ItemStack(Material.STONE_AXE))) {
         	e.setCancelled(true);
         	saveBaseConfig(2);
-        	p.sendMessage("Le fichier de config à bien était mis à jours");
+        	p.sendMessage("Le fichier de config a bien etait mis a jours");
         }
         
     }
