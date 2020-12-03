@@ -1,5 +1,6 @@
 package fr.sl.team;
 
+import fr.sl.utils.CommandUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,14 +26,8 @@ public class TeamCommand implements CommandExecutor {
 
         switch (args[0]) {
             case "addTeam": {
-                if (args.length != 2) {
-                    sender.sendMessage("Wrong command usage see /fkteam addTeam help for more information");
-                }
-
-                if (args[1].equals("help")) {
-                    sender.sendMessage("Usage : /fkteam addTeam <team name>");
-                    return true;
-                }
+                if (!CommandUtils.basicCommandTest(sender, "fkteam addTeam", args, 2))
+                    return false;
 
                 if (data.teamExist(args[1])) {
                     sender.sendMessage(String.format("§4Error : Team %s already exist !", args[1]));
@@ -45,14 +40,10 @@ public class TeamCommand implements CommandExecutor {
                 return true;
             }
             case "addPlayer": {
-                if (args.length == 2 && args[1].equals("help")) {
-                    sender.sendMessage("Usage : /fkteam addPlayer <PlayerName> <TeamName>");
-                }
 
-                if (args.length != 3) {
-                    sender.sendMessage("Wrong command usage see /fkteam addPlayer help for more information");
+                if (!CommandUtils.basicCommandTest(sender, "fkteam Player", args, 3))
                     return false;
-                }
+
                 Player player = Bukkit.getServer().getPlayer(args[1]);
                 if (player == null) {
                     sender.sendMessage(String.format("Unknown player %s", args[1]));
@@ -68,14 +59,10 @@ public class TeamCommand implements CommandExecutor {
 
             }
             case "list": {
-                if (args.length == 2 && args[1].equals("help")) {
-                    sender.sendMessage("Usage : /fkteam list [team/player] <TeamName if player>");
-                    return true;
-                }
-                if (args.length < 3) {
-                    sender.sendMessage("Wrong command usage see /fkteam list help for more information");
+
+                if (!CommandUtils.basicCommandTest(sender, "fkteam list", args, 3, 2, false))
                     return false;
-                }
+
                 switch (args[2]) {
                     case "team": {
 
