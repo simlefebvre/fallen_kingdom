@@ -8,11 +8,11 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class BreakBlock implements Listener {
-	
-	@EventHandler
-	public void onBreakBlockEvent(BlockBreakEvent e) {
-		if(e.getPlayer().getGameMode().equals(GameMode.CREATIVE) && e.getPlayer().getInventory().getItemInMainHand().equals(new ItemStack(Material.COMMAND_BLOCK))){
-			
-		}
-	}
+
+    @EventHandler
+    public void onBreakBlockEvent(BlockBreakEvent e) {
+        if (e.getPlayer().getGameMode().equals(GameMode.CREATIVE) && e.getPlayer().getInventory().getItemInMainHand().equals(new ItemStack(Material.COMMAND))) {
+
+        }
+    }
 }
