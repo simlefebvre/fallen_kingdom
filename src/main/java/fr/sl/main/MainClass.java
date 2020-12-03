@@ -1,8 +1,8 @@
 package fr.sl.main;
 
-import org.bukkit.plugin.java.JavaPlugin;
-
 import fr.sl.event.BreakBlock;
+import fr.sl.team.TeamLoader;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class MainClass extends JavaPlugin {
 
@@ -13,6 +13,8 @@ public class MainClass extends JavaPlugin {
         this.saveDefaultConfig();
         //this.getCommand("fk").setExecutor(new CommandeManager());
         getServer().getPluginManager().registerEvents(new BreakBlock(), this);
+        TeamLoader teamLoader = new TeamLoader(this);
+        teamLoader.registerTeamSystem();
     }
 
     public void onDisable() {
