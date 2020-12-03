@@ -1,13 +1,17 @@
 package fr.sl.main;
 
+import org.bukkit.plugin.java.JavaPlugin;
+
 import fr.sl.event.BreakBlock;
 import fr.sl.team.TeamLoader;
-import org.bukkit.plugin.java.JavaPlugin;
+import fr.sl.zone.Area;
 
 public class MainClass extends JavaPlugin {
 
+	public Area Area1;
+	public Area Area2;
+	
     @Override
-
     public void onEnable() {
         System.out.println("[FALLEN KINGDOM] le plugin est bien lance");
         this.saveDefaultConfig();
@@ -18,7 +22,6 @@ public class MainClass extends JavaPlugin {
     }
 
     public void onDisable() {
-
+    	
     }
-
 }

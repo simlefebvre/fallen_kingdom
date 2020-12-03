@@ -6,10 +6,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import fr.sl.main.MainClass;
+import fr.sl.team.TeamData;
 
 public class PoseBlock implements Listener{
 	
-	
+	private TeamData team;
 	private MainClass mc;
 	
 	public PoseBlock(MainClass main) {
@@ -19,8 +20,11 @@ public class PoseBlock implements Listener{
 	public void onPutBlock(BlockPlaceEvent e) {
 		Player p = e.getPlayer();
 		Block b = e.getBlock();
+		String team = TeamData.getInstance().getTeam(p);
 		
-	
+		if(mc.Area1.isInBase(b.getLocation())){
+			// a reprendre ici
+		}
 		
 	}
 }
