@@ -8,6 +8,14 @@ import org.bukkit.entity.Player;
 
 public class TeamCommand implements CommandExecutor {
 
+    TeamData data;
+
+    public TeamCommand() {
+        super();
+        data = TeamData.getInstance();
+    }
+
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -26,12 +34,12 @@ public class TeamCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (TeamData.getInstance().teamExist(args[1])) {
+                if (data.teamExist(args[1])) {
                     sender.sendMessage(String.format("§4Error : Team %s already exist !", args[1]));
                     return false;
                 }
 
-                TeamData.getInstance().createTeam(args[1]);
+                data.createTeam(args[1]);
                 sender.sendMessage(String.format("Team %s successfully created", args[1]));
 
                 return true;
@@ -50,20 +58,37 @@ public class TeamCommand implements CommandExecutor {
                     sender.sendMessage(String.format("Unknown player %s", args[1]));
                     return false;
                 }
-                if (!TeamData.getInstance().teamExist(args[2])) {
+                if (!data.teamExist(args[2])) {
                     sender.sendMessage(String.format("Unknown team %s", args[2]));
                     return false;
                 }
-                TeamData.getInstance().addPlayerToTeam(player, args[2]);
+                data.addPlayerToTeam(player, args[2]);
                 sender.sendMessage(String.format("Successfully added %s to team %s", args[1], args[2]));
+                return true;
 
+            }
+            case "list": {
+                if (args.length == 2 && args[1].equals("help")) {
+                    sender.sendMessage("Usage : /fkteam list [team/player] <TeamName if player>");
+                    return true;
+                }
+                if (args.length < 3) {
+                    sender.sendMessage("Wrong command usage see /fkteam list help for more information");
+                    return false;
+                }
+                switch (args[2]) {
+                    case "team": {
+
+                    }
+                    case "player": {
+
+                    }
+                }
             }
             default: {
                 sender.sendMessage(String.format("Unknown sub command: %s see /help fkteam for command list", args[1]));
+                return false;
             }
         }
-
-        return true;
     }
-
 }
