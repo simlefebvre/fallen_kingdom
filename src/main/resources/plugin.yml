@@ -1,5 +1,5 @@
 name: FallenKingdom
-main: fr.sl.main.MainClass
+main: main.java.fr.sl.main.MainClass
 author: SimonLefebvre
 version: 0.0
 api-version: 1.13

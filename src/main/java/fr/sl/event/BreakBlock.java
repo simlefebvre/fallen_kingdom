@@ -1,4 +1,4 @@
-package fr.sl.event;
+package main.java.fr.sl.event;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;

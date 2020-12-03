@@ -1,4 +1,4 @@
-package fr.sl.commande;
+package main.java.fr.sl.commande;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
