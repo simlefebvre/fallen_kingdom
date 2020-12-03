@@ -1,4 +1,4 @@
-package main.java.fr.sl.event;
+package fr.sl.event;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -12,7 +12,7 @@ public class BreakBlock implements Listener {
     @EventHandler
     public void onBreakBlockEvent(BlockBreakEvent e) {
         if (e.getPlayer().getGameMode().equals(GameMode.CREATIVE) && e.getPlayer().getInventory().getItemInMainHand().equals(new ItemStack(Material.COMMAND_BLOCK))) {
-
+        	e.getPlayer().sendMessage("test");
         }
     }
 }

@@ -1,8 +1,8 @@
-package main.java.fr.sl.main;
+package fr.sl.main;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import main.java.fr.sl.event.BreakBlock;
+import fr.sl.event.BreakBlock;
 
 public class MainClass extends JavaPlugin {
 
