@@ -1,18 +1,20 @@
 package fr.sl.main;
 
+import java.util.ArrayList;
+import java.util.logging.Logger;
+
+import org.bukkit.plugin.java.JavaPlugin;
+
 import fr.sl.event.BreakBlock;
 import fr.sl.team.TeamLoader;
 import fr.sl.zone.Area;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.logging.Logger;
 
 public class MainClass extends JavaPlugin {
 
-    public Area Area1;
-    public Area Area2;
     public static Logger LOGGER;
 
+    public ArrayList<Area> Areas = new ArrayList<Area>();
+    
     @Override
     public void onEnable() {
         this.getLogger().info("plugin loaded");

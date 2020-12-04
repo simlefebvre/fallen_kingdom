@@ -10,7 +10,7 @@ import fr.sl.team.TeamData;
 
 public class PoseBlock implements Listener{
 	
-	private TeamData team;
+	private TeamData team = TeamData.getInstance();
 	private MainClass mc;
 	
 	public PoseBlock(MainClass main) {
@@ -20,10 +20,12 @@ public class PoseBlock implements Listener{
 	public void onPutBlock(BlockPlaceEvent e) {
 		Player p = e.getPlayer();
 		Block b = e.getBlock();
-		String team = TeamData.getInstance().getTeam(p);
+		String teamp = TeamData.getInstance().getTeam(p);
 		
-		if(mc.Area1.isInBase(b.getLocation())){
-			// a reprendre ici
+		if(mc.Areas.get(0).isInBase(b.getLocation())){
+			if(!teamp.equals(mc.Areas.get(0).getTeam())) {
+				e.setCancelled(true);
+			}
 		}
 		
 	}

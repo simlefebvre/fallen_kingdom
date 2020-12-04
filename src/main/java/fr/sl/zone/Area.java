@@ -39,4 +39,11 @@ public class Area {
 			return false;
 		}
 	}
+	public String getTeam() {
+		// TODO Auto-generated method stub
+		return this.team;
+	}
+	public int getIndex() {
+		return id;
+	}
 }
