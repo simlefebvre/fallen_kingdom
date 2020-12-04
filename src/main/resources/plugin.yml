@@ -10,3 +10,5 @@ commands:
     permission: fallenkingdom.teammanagement
   fkteambase:
     description: assosie une a une base une team
+  fkstart:
+    description: fonction qui permet dans lancer le pl

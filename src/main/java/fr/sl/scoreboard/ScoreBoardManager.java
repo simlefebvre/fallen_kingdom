@@ -25,7 +25,9 @@ public class ScoreBoardManager {
 		obj = board.registerNewObjective("test", "dummy","test");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 		
-		obj.getScore("abc").setScore(0);
+		this.addLine("0 sec", 0);
+		this.addLine("0 min", 1);
+		this.addLine("0 jour", 2);
 		
 		this.PrintSb();
 	}

@@ -20,7 +20,7 @@ public class AreaList {
 		areas.add(a);
 	}
 	
-	public ArrayList getList() {
+	public ArrayList<Area> getList() {
 		return areas;
 	}
 	

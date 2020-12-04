@@ -21,6 +21,12 @@ public class Area {
 		this.id = id;
 		this.team = team;
 	}
+	public int[] getCoo1() {
+		return coo1;
+	}
+	public World getW() {
+		return w;
+	}
 	public Area(int[] coo1,int[] coo2,World w,int id) {
 		System.out.println("X" + coo1[0]);
 		this.coo1 = coo1.clone();
