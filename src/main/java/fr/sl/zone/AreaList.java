@@ -14,6 +14,14 @@ public class AreaList {
 	public AreaList() {
 		areas = new ArrayList<Area>();
 	}
+	public void print() {
+		ListIterator<Area> li = areas.listIterator();
+		boolean test = true;
+	    while (li.hasNext() && test) {
+	    	System.out.println(li.next().getIndex());
+	    	
+    	}
+    }
 	
 	public void addArea(Area a) {
 		areas.add(a);
@@ -25,7 +33,7 @@ public class AreaList {
 		boolean test = true;
 	    while (li.hasNext() && test) {
 	    	Area a = li.next();
-	    	if("" + a.getIndex() == index) {
+	    	if(("" + a.getIndex()).equalsIgnoreCase(index)) {
 	    		return a;
 	    	}
 	    }

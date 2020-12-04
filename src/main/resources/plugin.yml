@@ -8,3 +8,5 @@ commands:
     description: on taffe dessus tkt
     usage: /<command> test
     permission: fallenkingdom.teammanagement
+  fkteambase:
+    description: assosie une a une base une team

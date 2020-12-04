@@ -22,11 +22,11 @@ public class PoseBlock implements Listener{
 		Block b = e.getBlock();
 		String teamp = TeamData.getInstance().getTeam(p);
 		
-		if(mc.Areas.get(0).isInBase(b.getLocation())){
-			if(!teamp.equals(mc.Areas.get(0).getTeam())) {
-				e.setCancelled(true);
-			}
-		}
+		//if(mc.Areas.get(0).isInBase(b.getLocation())){
+			//if(!teamp.equals(mc.Areas.get(0).getTeam())) {
+				//e.setCancelled(cancel);
+		//	}
+		//}
 		
 	}
 }

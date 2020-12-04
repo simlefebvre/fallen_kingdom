@@ -25,6 +25,7 @@ public class SetTeamBase implements CommandExecutor{
 				if(area != null) {
 					if(TeamData.getInstance().teamExist(args[1])) {
 						area.setTeam(args[1]);
+						p.sendMessage("La base"+args[0]+"à était attribué à l'équipe "+args[1]);
 					}else {
 						p.sendMessage("La team n'a pas était trouve");
 					}

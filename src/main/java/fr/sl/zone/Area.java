@@ -21,6 +21,7 @@ public class Area {
 		this.team = team;
 	}
 	public Area(int[] coo1,int[] coo2,int id) {
+		System.out.println("test");
 		this.coo1 = coo1;
 		this.coo2 = coo2;
 		this.id = id;
