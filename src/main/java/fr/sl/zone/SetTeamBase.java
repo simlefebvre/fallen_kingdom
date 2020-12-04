@@ -14,13 +14,6 @@ public class SetTeamBase implements CommandExecutor {
     public SetTeamBase(MainClass mc) {
         this.mc = mc;
     }
-
-<<<<<<< HEAD
-	private MainClass mc;
-	
-	public SetTeamBase(MainClass mc) {
-		this.mc = mc;
-	}
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
