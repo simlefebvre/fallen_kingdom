@@ -7,6 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static java.lang.String.format;
+
 public class TeamCommand implements CommandExecutor {
 
     TeamData data;
@@ -30,12 +32,12 @@ public class TeamCommand implements CommandExecutor {
                     return false;
 
                 if (data.teamExist(args[1])) {
-                    sender.sendMessage(String.format("§4Error : Team %s already exist !", args[1]));
+                    sender.sendMessage(format("§4Error : Team %s already exist !", args[1]));
                     return false;
                 }
 
                 data.createTeam(args[1]);
-                sender.sendMessage(String.format("Team %s successfully created", args[1]));
+                sender.sendMessage(format("Team %s successfully created", args[1]));
 
                 return true;
             }
@@ -46,15 +48,15 @@ public class TeamCommand implements CommandExecutor {
 
                 Player player = Bukkit.getServer().getPlayer(args[1]);
                 if (player == null) {
-                    sender.sendMessage(String.format("Unknown player %s", args[1]));
+                    sender.sendMessage(format("Unknown player %s", args[1]));
                     return false;
                 }
                 if (!data.teamExist(args[2])) {
-                    sender.sendMessage(String.format("Unknown team %s", args[2]));
+                    sender.sendMessage(format("Unknown team %s", args[2]));
                     return false;
                 }
                 data.addPlayerToTeam(player, args[2]);
-                sender.sendMessage(String.format("Successfully added %s to team %s", args[1], args[2]));
+                sender.sendMessage(format("Successfully added %s to team %s", args[1], args[2]));
                 return true;
 
             }
@@ -62,18 +64,31 @@ public class TeamCommand implements CommandExecutor {
 
                 if (!CommandUtils.basicCommandTest(sender, "fkteam list", args, 3, 2, false))
                     return false;
-
+                StringBuilder msg = new StringBuilder(format("List of %ss", args[2]));
                 switch (args[2]) {
                     case "team": {
-
+                        msg.append(" :");
+                        for (String teamName : data.getTeams()){
+                            msg.append(teamName);
+                            msg.append(" ");
+                        }
+                        sender.sendMessage(msg.toString());
                     }
                     case "player": {
-
+                        if (!CommandUtils.basicCommandTest(sender, "fkteam list", args, 4))
+                            return false;
+                        if (data.teamExist(args[3])){
+                            msg.append(format(" in team %s :",args[3]));
+                            for (Player p : data.getPlayer(args[3])){
+                                msg.append(format("%s ",p.getName()));
+                            }
+                        }
+                        return false;
                     }
                 }
             }
             default: {
-                sender.sendMessage(String.format("Unknown sub command: %s see /help fkteam for command list", args[1]));
+                sender.sendMessage(format("Unknown sub command: %s see /help fkteam for command list", args[1]));
                 return false;
             }
         }

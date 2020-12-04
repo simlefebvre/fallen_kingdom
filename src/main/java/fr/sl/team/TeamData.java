@@ -19,6 +19,14 @@ public class TeamData {
         return teams.containsKey(name);
     }
 
+    public String[] getTeams() {
+        return teams.keySet().toArray(new String[0]);
+    }
+
+    public Player[] getPlayer(String team) {
+        return teams.get(team).toArray(new Player[0]);
+    }
+
     public void createTeam(String teamName) {
         teams.put(teamName, new ArrayList<>());
     }
