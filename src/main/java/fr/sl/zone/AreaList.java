@@ -11,16 +11,25 @@ public class AreaList {
 		this.areas = areas;
 	}
 	
-	public Area getArea(int index) {
+	public AreaList() {
+		areas = new ArrayList<Area>();
+	}
+	
+	public void addArea(Area a) {
+		areas.add(a);
+	}
+	
+	
+	public Area getArea(String index) {
 		ListIterator<Area> li = areas.listIterator();
 		boolean test = true;
-	    //while (areas.hasNext() && test) {
-	    //	Area a = li.next();
-	    //	if(a.getindex() == index) {
-	    //		return a;
-	    //	}
-	    //}
-	        return null;
+	    while (li.hasNext() && test) {
+	    	Area a = li.next();
+	    	if("" + a.getIndex() == index) {
+	    		return a;
+	    	}
+	    }
+	    return null;
 	}
 	
 }
