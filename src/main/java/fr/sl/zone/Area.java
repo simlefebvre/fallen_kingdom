@@ -24,9 +24,6 @@ public class Area {
 	public Area(int[] coo1,int[] coo2,World w,int id) {
 		System.out.println("X" + coo1[0]);
 		this.coo1 = coo1.clone();
-		System.out.println("X'" + this.coo1[0]);
-		System.out.println("Y'" + this.coo1[1]);
-		System.out.println("Z'" + this.coo1[2]);
 		this.coo2 = coo2.clone();
 		this.w = w;
 		this.id = id;
@@ -43,18 +40,6 @@ public class Area {
 	}
 	
 	public boolean isInBase(Location l) {
-		System.out.println(l.toString());
-		System.out.println(coo1[0]);
-		System.out.println(coo1[1]);
-		System.out.println(coo1[2]);
-		System.out.println(coo2[0]);
-		System.out.println(coo2[1]);
-		System.out.println(coo2[2]);
-		System.out.println(l.getWorld().toString());
-		System.out.println(l.getWorld().getName().equals(w.getName()));
-		System.out.println(l.getX() < coo1[0] && l.getX() > coo2[0]);
-		System.out.println(l.getY() > coo2[1] - 20);
-		System.out.println(l.getZ() < coo1[2] && l.getZ() > coo2[2]); 		
 		if(l.getWorld().equals(w) && l.getX() < coo1[0] && l.getX() > coo2[0] && l.getY() > coo2[1] - 20 &&  l.getZ() < coo1[2] && l.getZ() > coo2[2]) {
 			return true;
 		}else {

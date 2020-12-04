@@ -25,6 +25,7 @@ public class PoseBlock implements Listener{
 	
 	@EventHandler
 	public void onPutBlock(BlockPlaceEvent e) {
+				
 		Player p = e.getPlayer();
 		Block b = e.getBlock();
 		String teamp = team.getTeam(p);
@@ -38,7 +39,7 @@ public class PoseBlock implements Listener{
 	    		if(!a.isInBase(b.getLocation())) {
 	    			if(!b.getType().equals(Material.TNT) && !b.getType().equals(Material.TORCH) && !b.getType().equals(Material.REDSTONE_TORCH) && !b.getType().equals(Material.LEVER) && !b.getType().equals(Material.WATER) && !b.getType().equals(Material.LAVA) && !b.getType().equals(Material.FIRE)) {
 	    				e.setCancelled(true);
-	    				p.sendMessage(Color.RED + "[FK] Vous ne pouvez pas posez le bloc "+b.getType().toString()+" en dehors de votre base !");
+	    				p.sendMessage("&c[FK] Vous ne pouvez pas posez le bloc "+b.getType().toString()+" en dehors de votre base !");
 	    			}
 	    		}	    		
 	    	}
