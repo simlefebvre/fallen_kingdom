@@ -1,6 +1,10 @@
 package fr.sl.team;
 
 import fr.sl.main.MainClass;
+import org.bukkit.Bukkit;
+
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class TeamLoader {
 
@@ -13,12 +17,15 @@ public class TeamLoader {
     public void registerTeamSystem() {
         main.getCommand("fkteam").setExecutor(new TeamCommand());
 
-        for (String s : main.getConfig().getKeys(false)) {
-            MainClass.LOGGER.info(String.format("non deep key :%s", s));
-        }
-
-        for (String s : main.getConfig().getKeys(true)) {
-            MainClass.LOGGER.info(String.format("deep key :%s", s));
+        for (String s : main.getConfig().getKeys(true).stream().filter(s -> s.startsWith("team")).collect(Collectors.toList())) {
+            if (!s.contains("."))
+                continue;
+            String team = (String) s.subSequence(s.indexOf(".") + 1, s.length());
+            TeamData.getInstance().createTeam(team);
+            
+            main.getConfig().getList(s).forEach(uuid -> {
+                TeamData.getInstance().addPlayerToTeam(Bukkit.getServer().getPlayer(UUID.fromString((String) uuid)), team);
+            });
         }
     }
 
