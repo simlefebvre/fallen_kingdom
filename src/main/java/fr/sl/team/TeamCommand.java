@@ -84,12 +84,13 @@ public class TeamCommand implements CommandExecutor {
                                 msg.append(format("%s ", p.getName()));
                             }
                         }
+                        sender.sendMessage(msg.toString());
                         return true;
                     }
                 }
             }
             default: {
-                sender.sendMessage(format("Unknown sub command: %s see /help fkteam for command list", args[1]));
+                sender.sendMessage(format("Unknown sub command: %s see /help fkteam for command list", args[0]));
                 return false;
             }
         }
