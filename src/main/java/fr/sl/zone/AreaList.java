@@ -12,14 +12,14 @@ public class AreaList {
 	}
 	
 	public Area getArea(int index) {
-		ListIterator<String> li = areas.listIterator<String>();
+		ListIterator<Area> li = areas.listIterator();
 		boolean test = true;
-	    while (areas.hasNext() && test) {
-	    	Area a = li.next();
-	    	if(a.getindex() == index) {
-	    		
-	    	}
-	    }
+	    //while (areas.hasNext() && test) {
+	    //	Area a = li.next();
+	    //	if(a.getindex() == index) {
+	    //		return a;
+	    //	}
+	    //}
 	        
 	}
 	
