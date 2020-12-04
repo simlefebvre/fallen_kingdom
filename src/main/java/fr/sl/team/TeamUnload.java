@@ -18,7 +18,8 @@ public class TeamUnload {
         for (String team : TeamData.getInstance().getTeams()) {
             ArrayList<String> playersUUID = new ArrayList<>();
             for (Player p : TeamData.getInstance().getPlayer(team)) {
-                playersUUID.add(p.getUniqueId().toString());
+                if (p != null)
+                    playersUUID.add(p.getUniqueId().toString());
             }
 
             mainClass.getConfig().set(String.format("team.%s", team), playersUUID);

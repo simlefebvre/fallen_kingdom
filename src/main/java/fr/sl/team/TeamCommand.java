@@ -79,8 +79,8 @@ public class TeamCommand implements CommandExecutor {
                         if (!CommandUtils.basicCommandTest(sender, "fkteam list", args, 3))
                             return false;
                         if (data.teamExist(args[2])) {
-                            msg.append(format(" in team %s :", args[3]));
-                            for (Player p : data.getPlayer(args[3])) {
+                            msg.append(format(" in team %s :", args[2]));
+                            for (Player p : data.getPlayer(args[2])) {
                                 msg.append(format("%s ", p.getName()));
                             }
                         }
