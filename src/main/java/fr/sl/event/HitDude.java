@@ -14,7 +14,9 @@ public class HitDude implements Listener {
     @EventHandler
     public void onHit(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
-            if (TeamData.getInstance().getTeam((Player) e.getEntity()) == TeamData.getInstance().getTeam((Player) e.getDamager())) {
+            String team1 = TeamData.getInstance().getTeam((Player) e.getEntity());
+            String team2 = TeamData.getInstance().getTeam((Player) e.getDamager());
+            if (team1 != null && team1.equals(team2)) {
                 e.setCancelled(true);
                 e.setDamage(0);
             }
