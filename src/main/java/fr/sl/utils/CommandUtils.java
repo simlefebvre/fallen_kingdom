@@ -23,12 +23,12 @@ public class CommandUtils {
             sender.sendMessage(getHelpMessage(command));
         }
         if (strict) {
-            if (args.length != 3) {
+            if (args.length != minArgsNumber) {
                 sender.sendMessage(String.format("Wrong command usage see /%s help for more information", command));
                 return false;
             }
         } else {
-            if (args.length < 3) {
+            if (args.length < minArgsNumber) {
                 sender.sendMessage(String.format("Wrong command usage see /%s help for more information", command));
                 return false;
             }
