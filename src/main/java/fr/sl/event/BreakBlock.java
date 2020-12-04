@@ -1,5 +1,7 @@
 package fr.sl.event;
 
+import java.util.Iterator;
+
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -64,14 +66,18 @@ public class BreakBlock implements Listener {
         	}
         	e.setCancelled(true);
         }else if(p.getGameMode().equals(GameMode.CREATIVE) && e.getPlayer().getInventory().getItemInMainHand().equals(new ItemStack(Material.WOODEN_AXE))) {
+
         	e.setCancelled(true);
-        	mc.Areas.addArea(new Area(coo1, coo2, 1));
-        	p.sendMessage(mc.Areas.toString());
+        	mc.Areas.addArea(new Area(coo1, coo2,wd, 1));
+        	Iterator it = mc.Areas.getList().iterator();
+        	while(it.hasNext()) {
+        		System.out.println(it.next().toString());
+        	}
         	saveBaseConfig(1);
         	p.sendMessage("Le fichier de config a bien etait mis a jours");
         }else if(p.getGameMode().equals(GameMode.CREATIVE) && e.getPlayer().getInventory().getItemInMainHand().equals(new ItemStack(Material.STONE_AXE))) {
         	e.setCancelled(true);
-        	mc.Areas.addArea(new Area(coo1, coo2, 2));
+        	mc.Areas.addArea(new Area(coo1, coo2,wd, 2));
         	saveBaseConfig(2);
         	p.sendMessage("Le fichier de config a bien etait mis a jours");
         }
