@@ -65,12 +65,12 @@ public class BreakBlock implements Listener {
         	e.setCancelled(true);
         }else if(p.getGameMode().equals(GameMode.CREATIVE) && e.getPlayer().getInventory().getItemInMainHand().equals(new ItemStack(Material.WOODEN_AXE))) {
         	e.setCancelled(true);
-        	mc.Areas.add(new Area(coo1, coo2, 1));
+        	mc.Areas.addArea(new Area(coo1, coo2, 1));
         	saveBaseConfig(1);
         	p.sendMessage("Le fichier de config a bien etait mis a jours");
         }else if(p.getGameMode().equals(GameMode.CREATIVE) && e.getPlayer().getInventory().getItemInMainHand().equals(new ItemStack(Material.STONE_AXE))) {
         	e.setCancelled(true);
-        	mc.Areas.add(new Area(coo1, coo2, 2));
+        	mc.Areas.addArea(new Area(coo1, coo2, 2));
         	saveBaseConfig(2);
         	p.sendMessage("Le fichier de config a bien etait mis a jours");
         }
