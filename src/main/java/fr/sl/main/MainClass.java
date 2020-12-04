@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.sl.event.BreakBlock;
-import fr.sl.team.TeamCommand;
+import fr.sl.event.PoseBlock;
 import fr.sl.team.TeamLoader;
 import fr.sl.team.TeamUnload;
 import fr.sl.zone.AreaList;
@@ -24,6 +24,7 @@ public class MainClass extends JavaPlugin {
         LOGGER = getLogger();
 
         getServer().getPluginManager().registerEvents(new BreakBlock(this), this);
+        getServer().getPluginManager().registerEvents(new PoseBlock(this), this);
         this.getCommand("fkteambase").setExecutor(new SetTeamBase(this));
         TeamLoader teamLoader = new TeamLoader(this);
         teamLoader.registerTeamSystem();
