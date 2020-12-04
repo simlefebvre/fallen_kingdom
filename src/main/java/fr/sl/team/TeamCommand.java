@@ -62,28 +62,29 @@ public class TeamCommand implements CommandExecutor {
             }
             case "list": {
 
-                if (!CommandUtils.basicCommandTest(sender, "fkteam list", args, 3, 2, false))
+                if (!CommandUtils.basicCommandTest(sender, "fkteam list", args, 2, 2, false))
                     return false;
-                StringBuilder msg = new StringBuilder(format("List of %ss", args[2]));
-                switch (args[2]) {
+                StringBuilder msg = new StringBuilder(format("List of %ss", args[1]));
+                switch (args[1]) {
                     case "team": {
                         msg.append(" :");
-                        for (String teamName : data.getTeams()){
+                        for (String teamName : data.getTeams()) {
                             msg.append(teamName);
                             msg.append(" ");
                         }
                         sender.sendMessage(msg.toString());
+                        return true;
                     }
                     case "player": {
-                        if (!CommandUtils.basicCommandTest(sender, "fkteam list", args, 4))
+                        if (!CommandUtils.basicCommandTest(sender, "fkteam list", args, 3))
                             return false;
-                        if (data.teamExist(args[3])){
-                            msg.append(format(" in team %s :",args[3]));
-                            for (Player p : data.getPlayer(args[3])){
-                                msg.append(format("%s ",p.getName()));
+                        if (data.teamExist(args[2])) {
+                            msg.append(format(" in team %s :", args[3]));
+                            for (Player p : data.getPlayer(args[3])) {
+                                msg.append(format("%s ", p.getName()));
                             }
                         }
-                        return false;
+                        return true;
                     }
                 }
             }
