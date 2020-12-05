@@ -18,7 +18,6 @@ public class JoinQuitEvent implements Listener{
 	@EventHandler
 	public void OnPlayerJoin(PlayerJoinEvent e) {
 		mc.sbm.PrintSb();
-		Player p = e.getPlayer();
 		
 	}
 	

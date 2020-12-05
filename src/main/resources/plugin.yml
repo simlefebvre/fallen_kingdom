@@ -12,3 +12,5 @@ commands:
     description: assosie une a une base une team
   fkstart:
     description: fonction qui permet dans lancer le pl
+  base:
+    description: donne les coordones de la base du joueur

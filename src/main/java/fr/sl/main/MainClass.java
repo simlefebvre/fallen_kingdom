@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.sl.command.Base;
 import fr.sl.event.BreakBlock;
 import fr.sl.event.HitDude;
 import fr.sl.event.JoinQuitEvent;
@@ -39,6 +40,7 @@ public class MainClass extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
 
         this.getCommand("fkstart").setExecutor(new Start(this));
+        this.getCommand("base").setExecutor(new Base(this));
         this.getCommand("fkteambase").setExecutor(new SetTeamBase(this));
         TeamLoader teamLoader = new TeamLoader(this);
         teamLoader.registerTeamSystem();
