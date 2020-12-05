@@ -10,13 +10,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class CommandHandler implements CommandExecutor, TabCompleter {
+public class CommandHandler implements CommandExecutor, TabCompleter {
 
     private final String prefix;
-    private ArrayList<String> aliases;
+    private final ArrayList<String> aliases;
     private final ArrayList<CommandHandler> subCommands = new ArrayList<>();
+    private final CompletionProvider[] providers;
+    private final CommandFunction function;
 
-    public CommandHandler(String prefix, List<String> aliases, JavaPlugin plugin) {
+    public CommandHandler(String prefix, List<String> aliases, CompletionProvider[] providers, JavaPlugin plugin) {
+        this(prefix, aliases, providers, plugin, null);
+    }
+
+    public CommandHandler(String prefix, List<String> aliases, CompletionProvider[] providers, JavaPlugin plugin, CommandFunction function) {
         if (plugin != null) {
             Command command = plugin.getCommand(prefix);
             assert command != null;
@@ -25,14 +31,8 @@ public abstract class CommandHandler implements CommandExecutor, TabCompleter {
 
         this.aliases = (ArrayList<String>) aliases;
         this.prefix = prefix;
-    }
-
-    public void addSubCommand(CommandHandler subCommand) {
-        subCommands.add(subCommand);
-    }
-
-    public List<CommandHandler> getSubCommands() {
-        return subCommands;
+        this.providers = providers;
+        this.function = function;
     }
 
     @Override
@@ -43,27 +43,41 @@ public abstract class CommandHandler implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args, String[] argsTrace) {
         ArrayList<String> possibilities = new ArrayList<>();
 
-
-        if (args.length == 0) {
-            if (getSubCommands() == null) {
-                return null;
+        if (getSubCommands() != null) {
+            if (args.length == 0) {
+                getSubCommands().forEach(subCommand -> possibilities.add(subCommand.getPrefix()));
+                return possibilities;
             }
-            getSubCommands().forEach(subCommand -> possibilities.add(subCommand.getPrefix()));
-            return possibilities;
-        }
 
-        for (CommandHandler cmd : getSubCommands()) {
-            if (cmd.matches(args[0])) {
-                return cmd.onTabComplete(sender, command, alias, truncateArgs(args), generateArgsTrace(args, argsTrace));
+            for (CommandHandler cmd : getSubCommands()) {
+                if (cmd.matches(args[0])) {
+                    return cmd.onTabComplete(sender, command, alias, truncateArgs(args), generateArgsTrace(args, argsTrace));
+                }
             }
         }
 
+        if (args.length < providers.length) {
+            return providers[args.length].getPossibilities();
+        }
 
         return null;
     }
 
-    private String[] generateArgsTrace(String[] args) {
-        return generateArgsTrace(args, null);
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        return onCommand(sender, command, label, args, null);
+    }
+
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args, String[] argsTrace) {
+        for (CommandHandler cmd : getSubCommands()) {
+            if (cmd.matches(args[0])) {
+                return cmd.onCommand(sender, command, label, truncateArgs(args), generateArgsTrace(args, argsTrace));
+            }
+        }
+        if (function != null) {
+            return function.execute(sender, command, label, args, argsTrace, this);
+        }
+        return false;
     }
 
     private String[] generateArgsTrace(String[] args, String[] argsTrace) {
@@ -81,11 +95,24 @@ public abstract class CommandHandler implements CommandExecutor, TabCompleter {
         return arg.toArray(new String[0]);
     }
 
+    public boolean matches(String alias) {
+        return aliases.contains(alias);
+    }
+
+    public void addSubCommand(CommandHandler subCommand) {
+        subCommands.add(subCommand);
+    }
+
+    public CompletionProvider[] getProviders() {
+        return providers;
+    }
+
+    public List<CommandHandler> getSubCommands() {
+        return subCommands;
+    }
+
     public String getPrefix() {
         return prefix;
     }
 
-    public boolean matches(String alias) {
-        return aliases.contains(alias);
-    }
 }
