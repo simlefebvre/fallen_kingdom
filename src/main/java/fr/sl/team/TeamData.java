@@ -39,6 +39,9 @@ public class TeamData {
         if (!teams.containsKey(teamName)) {
             return;
         }
+        if (players.containsKey(player)) {
+            teams.get(players.get(player)).remove(player);
+        }
         if (!teams.get(teamName).contains(player)) {
             teams.get(teamName).add(player);
         }
