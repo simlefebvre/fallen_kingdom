@@ -14,7 +14,42 @@ public class GameManager {
 	
 	private MainClass mc;
 	private boolean start = false;
+	private boolean pvp = false;
+	private boolean nether = false;
+	private boolean assaut = false;
 	
+	public MainClass getMc() {
+		return mc;
+	}
+
+	public void setMc(MainClass mc) {
+		this.mc = mc;
+	}
+
+	public boolean isPvp() {
+		return pvp;
+	}
+
+	public void setPvp(boolean pvp) {
+		this.pvp = pvp;
+	}
+
+	public boolean isNether() {
+		return nether;
+	}
+
+	public void setNether(boolean nether) {
+		this.nether = nether;
+	}
+
+	public boolean isAssaut() {
+		return assaut;
+	}
+
+	public void setAssaut(boolean assaut) {
+		this.assaut = assaut;
+	}
+
 	public GameManager(MainClass mc) {
 		this.mc = mc; 
 	}
@@ -39,6 +74,7 @@ public class GameManager {
 			p.setGameMode(GameMode.SURVIVAL);
 			p.setHealth(20);
 			p.setFoodLevel(20);
+			p.getWorld().setTime(0);
 		}
 	}
 	

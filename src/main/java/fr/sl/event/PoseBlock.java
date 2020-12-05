@@ -3,6 +3,7 @@ package fr.sl.event;
 import java.awt.Color;
 import java.util.Iterator;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -37,13 +38,12 @@ public class PoseBlock implements Listener{
 	    	if(teamp.equals(a.getTeam())) {
 	    		//a vaut la base de la team du joueur
 	    		if(!a.isInBase(b.getLocation())) {
-	    			if(!b.getType().equals(Material.TNT) && !b.getType().equals(Material.TORCH) && !b.getType().equals(Material.REDSTONE_TORCH) && !b.getType().equals(Material.LEVER) && !b.getType().equals(Material.WATER) && !b.getType().equals(Material.LAVA) && !b.getType().equals(Material.FIRE)) {
+	    			if(!b.getType().equals(Material.TNT) && !b.getType().equals(Material.TORCH) && !b.getType().equals(Material.WALL_TORCH)&& !b.getType().equals(Material.REDSTONE_TORCH) && !b.getType().equals(Material.LEVER) && !b.getType().equals(Material.WATER) && !b.getType().equals(Material.LAVA) && !b.getType().equals(Material.FIRE)) {
 	    				e.setCancelled(true);
-	    				p.sendMessage("&c[FK] Vous ne pouvez pas posez le bloc "+b.getType().toString()+" en dehors de votre base !");
+	    				p.sendMessage(ChatColor.RED + "[FK] Vous ne pouvez pas posez le bloc "+b.getType().toString()+" en dehors de votre base !");
 	    			}
 	    		}	    		
 	    	}
 	    }
-		
 	}
 }

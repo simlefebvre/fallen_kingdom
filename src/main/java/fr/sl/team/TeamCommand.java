@@ -2,6 +2,7 @@ package fr.sl.team;
 
 import fr.sl.utils.CommandUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -56,7 +57,7 @@ public class TeamCommand implements CommandExecutor {
                     return false;
                 }
                 data.addPlayerToTeam(player, args[2]);
-                sender.sendMessage(format("Successfully added %s to team %s", args[1], args[2]));
+                Bukkit.broadcastMessage(format("Successfully added %s to team %s", args[1], args[2]));
                 return true;
 
             }
