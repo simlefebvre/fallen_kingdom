@@ -18,7 +18,7 @@ public class Area {
 		this.coo1 = coo1.clone();
 		this.coo2 = coo2.clone();
 		this.w = w;
-		this.id = id;
+		this.id = id; 	
 		this.team = team;
 	}
 	public int[] getCoo1() {
