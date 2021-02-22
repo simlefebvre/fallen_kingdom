@@ -5,14 +5,7 @@ import fr.sl.command.CompletionProvider;
 import fr.sl.command.completion.PlayerNameProvider;
 import fr.sl.utils.CommandUtils;
 import org.bukkit.Bukkit;
-<<<<<<<HEAD
 import org.bukkit.OfflinePlayer;
-=======
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
->>>>>>>570a9d89ba742f6cb3b9613cf81b65f23dfc6f0c
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
