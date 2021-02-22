@@ -1,6 +1,7 @@
 package fr.sl.scoreboard;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -22,12 +23,15 @@ public class ScoreBoardManager {
 		manager = Bukkit.getScoreboardManager();
 		board = manager.getNewScoreboard();
 		
-		obj = board.registerNewObjective("test", "dummy","test");
+		obj = board.registerNewObjective("test", "dummy",ChatColor.BLUE + "Fallen"+ChatColor.GOLD+"Kingdom");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 		
-		this.addLine("0 sec", 0);
-		this.addLine("0 min", 1);
-		this.addLine("0 jour", 2);
+		this.addLine("0 : 0", 0);
+		this.addLine("=-=-=-=-=-=", -1);
+		this.addLine(ChatColor.RED + "PvP : " + ChatColor.BOLD + "X", -2);
+		this.addLine(ChatColor.RED + "Nether : " + ChatColor.BOLD + "X", -3);
+		this.addLine(ChatColor.RED + "Assaut : " + ChatColor.BOLD + "X", -4);
+	//	this.addLine("0 " + ChatColor.GREEN + "jour", 2);
 		
 		this.PrintSb();
 	}
