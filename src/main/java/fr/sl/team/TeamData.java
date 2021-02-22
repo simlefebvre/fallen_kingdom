@@ -1,14 +1,14 @@
 package fr.sl.team;
 
-import org.bukkit.entity.Player;
+import org.bukkit.OfflinePlayer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TeamData {
     private static final TeamData instance = new TeamData();
-    private final HashMap<String, ArrayList<Player>> teams;
-    private final HashMap<Player, String> players;
+    private final HashMap<String, ArrayList<OfflinePlayer>> teams;
+    private final HashMap<OfflinePlayer, String> players;
 
     private TeamData() {
         teams = new HashMap<>();
@@ -23,8 +23,8 @@ public class TeamData {
         return teams.keySet().toArray(new String[0]);
     }
 
-    public Player[] getPlayer(String team) {
-        return teams.get(team).toArray(new Player[0]);
+    public OfflinePlayer[] getPlayer(String team) {
+        return teams.get(team).toArray(new OfflinePlayer[0]);
     }
 
     public void createTeam(String teamName) {
@@ -35,7 +35,7 @@ public class TeamData {
         return instance;
     }
 
-    public void addPlayerToTeam(Player player, String teamName) {
+    public void addPlayerToTeam(OfflinePlayer player, String teamName) {
         if (!teams.containsKey(teamName)) {
             return;
         }
@@ -48,7 +48,7 @@ public class TeamData {
         players.put(player, teamName);
     }
 
-    public String getTeam(Player player) {
+    public String getTeam(OfflinePlayer player) {
         return players.get(player);
     }
 

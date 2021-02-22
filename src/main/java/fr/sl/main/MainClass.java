@@ -26,7 +26,7 @@ public class MainClass extends JavaPlugin {
     public Timer timer;
     public ScoreBoardManager sbm;
     public GameManager gm;
-    
+
     @Override
     public void onEnable() {
         this.getLogger().info("plugin loaded");
@@ -42,13 +42,14 @@ public class MainClass extends JavaPlugin {
         this.getCommand("fkstart").setExecutor(new Start(this));
         this.getCommand("base").setExecutor(new Base(this));
         this.getCommand("fkteambase").setExecutor(new SetTeamBase(this));
+
         TeamLoader teamLoader = new TeamLoader(this);
         teamLoader.registerTeamSystem();
-        
+
         sbm = new ScoreBoardManager(this);
         timer = new Timer(this);
         gm = new GameManager(this);
-        
+
     }
 
     public void onDisable() {

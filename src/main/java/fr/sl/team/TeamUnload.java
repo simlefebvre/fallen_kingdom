@@ -1,7 +1,7 @@
 package fr.sl.team;
 
 import fr.sl.main.MainClass;
-import org.bukkit.entity.Player;
+import org.bukkit.OfflinePlayer;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ public class TeamUnload {
 
         for (String team : TeamData.getInstance().getTeams()) {
             ArrayList<String> playersUUID = new ArrayList<>();
-            for (Player p : TeamData.getInstance().getPlayer(team)) {
+            for (OfflinePlayer p : TeamData.getInstance().getPlayer(team)) {
                 if (p != null)
                     playersUUID.add(p.getUniqueId().toString());
             }

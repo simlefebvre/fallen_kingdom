@@ -15,16 +15,16 @@ public class TeamLoader {
     }
 
     public void registerTeamSystem() {
-        main.getCommand("fkteam").setExecutor(new TeamCommand());
+        main.getCommand("fkteam").setExecutor(TeamCommand.getCommandHandler(main));
 
         for (String s : main.getConfig().getKeys(true).stream().filter(s -> s.startsWith("team")).collect(Collectors.toList())) {
             if (!s.contains("."))
                 continue;
             String team = (String) s.subSequence(s.indexOf(".") + 1, s.length());
             TeamData.getInstance().createTeam(team);
-            
+
             main.getConfig().getList(s).forEach(uuid -> {
-                TeamData.getInstance().addPlayerToTeam(Bukkit.getServer().getPlayer(UUID.fromString((String) uuid)), team);
+                TeamData.getInstance().addPlayerToTeam(Bukkit.getOfflinePlayer(UUID.fromString((String) uuid)), team);
             });
         }
     }

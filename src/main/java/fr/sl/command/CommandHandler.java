@@ -13,7 +13,7 @@ import java.util.List;
 public class CommandHandler implements CommandExecutor, TabCompleter {
 
     private final String prefix;
-    private final ArrayList<String> aliases;
+    private final ArrayList<String> aliases = new ArrayList<>();
     private final ArrayList<CommandHandler> subCommands = new ArrayList<>();
     private final CompletionProvider[] providers;
     private final CommandFunction function;
@@ -23,13 +23,15 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
     }
 
     public CommandHandler(String prefix, List<String> aliases, CompletionProvider[] providers, JavaPlugin plugin, CommandFunction function) {
-        if (plugin != null) {
+        if (plugin != null && aliases != null) {
             Command command = plugin.getCommand(prefix);
             assert command != null;
             command.setAliases(aliases);
         }
 
-        this.aliases = (ArrayList<String>) aliases;
+        if (aliases != null)
+            this.aliases.addAll(aliases);
+        this.aliases.add(prefix);
         this.prefix = prefix;
         this.providers = providers;
         this.function = function;
@@ -43,8 +45,8 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args, String[] argsTrace) {
         ArrayList<String> possibilities = new ArrayList<>();
 
-        if (getSubCommands() != null) {
-            if (args.length == 0) {
+        if (getSubCommands().size() != 0) {
+            if (args.length == 1) {
                 getSubCommands().forEach(subCommand -> possibilities.add(subCommand.getPrefix()));
                 return possibilities;
             }
@@ -56,7 +58,7 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
             }
         }
 
-        if (args.length < providers.length) {
+        if (providers != null && args.length < providers.length) {
             return providers[args.length].getPossibilities();
         }
 

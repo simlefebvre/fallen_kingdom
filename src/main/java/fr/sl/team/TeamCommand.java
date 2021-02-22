@@ -1,98 +1,66 @@
 package fr.sl.team;
 
+import fr.sl.command.CommandHandler;
+import fr.sl.command.CompletionProvider;
+import fr.sl.command.completion.PlayerNameProvider;
 import fr.sl.utils.CommandUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static java.lang.String.format;
 
-public class TeamCommand implements CommandExecutor {
+public class TeamCommand {
+    public static CommandHandler getCommandHandler(JavaPlugin plugin) {
+        TeamData data = TeamData.getInstance();
+        CommandHandler command = new CommandHandler("fkTeam", null, null, plugin);
 
-    TeamData data;
+        CommandHandler addTeam = new CommandHandler("addTeam", null, null, null,
+                (sender, command1, label, args, argsTrace, handler) -> {
+                    if (!CommandUtils.basicCommandTest(sender, "fkteam addTeam", args, 1))
+                        return false;
 
-    public TeamCommand() {
-        super();
-        data = TeamData.getInstance();
-    }
-
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        if (args.length < 1) {
-            sender.sendMessage("Wrong command usage see /help fkteam for more information");
-        }
-
-        switch (args[0]) {
-            case "addTeam": {
-                if (!CommandUtils.basicCommandTest(sender, "fkteam addTeam", args, 2))
-                    return false;
-
-                if (data.teamExist(args[1])) {
-                    sender.sendMessage(format("§4Error : Team %s already exist !", args[1]));
-                    return false;
-                }
-
-                data.createTeam(args[1]);
-                sender.sendMessage(format("Team %s successfully created", args[1]));
-
-                return true;
-            }
-            case "addPlayer": {
-
-                if (!CommandUtils.basicCommandTest(sender, "fkteam Player", args, 3))
-                    return false;
-
-                Player player = Bukkit.getServer().getPlayer(args[1]);
-                if (player == null) {
-                    sender.sendMessage(format("Unknown player %s", args[1]));
-                    return false;
-                }
-                if (!data.teamExist(args[2])) {
-                    sender.sendMessage(format("Unknown team %s", args[2]));
-                    return false;
-                }
-                data.addPlayerToTeam(player, args[2]);
-                sender.sendMessage(format("Successfully added %s to team %s", args[1], args[2]));
-                return true;
-
-            }
-            case "list": {
-
-                if (!CommandUtils.basicCommandTest(sender, "fkteam list", args, 2, 2, false))
-                    return false;
-                StringBuilder msg = new StringBuilder(format("List of %ss", args[1]));
-                switch (args[1]) {
-                    case "team": {
-                        msg.append(" :");
-                        for (String teamName : data.getTeams()) {
-                            msg.append(teamName);
-                            msg.append(" ");
-                        }
-                        sender.sendMessage(msg.toString());
-                        return true;
+                    if (data.teamExist(args[0])) {
+                        sender.sendMessage(format("§4Error : Team %s already exist !", args[0]));
+                        return false;
                     }
-                    case "player": {
-                        if (!CommandUtils.basicCommandTest(sender, "fkteam list", args, 3))
-                            return false;
-                        if (data.teamExist(args[2])) {
-                            msg.append(format(" in team %s :", args[2]));
-                            for (Player p : data.getPlayer(args[2])) {
-                                msg.append(format("%s ", p.getName()));
-                            }
-                        }
-                        sender.sendMessage(msg.toString());
-                        return true;
+
+                    data.createTeam(args[1]);
+                    sender.sendMessage(format("Team %s successfully created", args[0]));
+
+                    return true;
+                });
+
+        CommandHandler addPlayer = new CommandHandler("addPlayer", null, new CompletionProvider[]{new PlayerNameProvider(),
+                () -> Arrays.asList(data.getTeams())},
+                null,
+                (sender, command1, label, args, argsTrace, handler) -> {
+                    if (!CommandUtils.basicCommandTest(sender, "fkteam Player", args, 2))
+                        return false;
+
+                    OfflinePlayer player = Bukkit.getServer().getPlayer(args[0]);
+
+                    if (player == null) {
+                        sender.sendMessage(format("Unknown player %s", args[0]));
+                        return false;
                     }
-                }
-            }
-            default: {
-                sender.sendMessage(format("Unknown sub command: %s see /help fkteam for command list", args[0]));
-                return false;
-            }
-        }
+                    if (!data.teamExist(args[2])) {
+                        sender.sendMessage(format("Unknown team %s", args[1]));
+                        return false;
+                    }
+
+                    data.addPlayerToTeam(player, args[2]);
+                    sender.sendMessage(format("Successfully added %s to team %s", args[0], args[1]));
+                    return true;
+                });
+
+        command.addSubCommand(addTeam);
+        command.addSubCommand(addPlayer);
+
+        return command;
     }
 }
